@@ -1,0 +1,38 @@
+/* Nvbr.module.css */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background-color: #f3f4f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #1f2937;
+  transition: color 0.2s ease-in-out, transform 0.2s;
+}
+
+.navbar a:hover {
+  color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Dark Mode Support */
+body.dark-mode .navbar {
+  background-color: #1f2937;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .navbar a {
+  color: #f9fafb;
+}
+
+body.dark-mode .navbar a:hover {
+  color: #10b981;
+}

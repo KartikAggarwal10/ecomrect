@@ -1,0 +1,83 @@
+.mn{
+    display: flex;
+flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 250px;
+    height: 180px;
+}
+input,button{
+    width: 180px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+       
+    align-items: center;
+}
+button{
+    background-color: aqua;
+}
+
+button:hover{
+    animation: nm 0.4s linear forwards ;
+}
+.lp{
+  text-align: center;
+  color:cadetblue;
+  font: 1.4em sans-serif;
+  font-weight:bolder;
+}
+.cls{
+   
+}
+/* body{
+    background: url("./assets/image.png");
+    background-repeat: no-repeat;
+    background-position: center;
+} */
+ .ll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+ }
+ .cls{
+    background-color: black;
+     height: 2px;
+     width: 1px;
+ }
+ .cls2{
+    background-color: black;
+     height: 2px;
+     width: 1px;
+ }
+@keyframes nm {
+    to{
+        filter:grayscale(1.3);
+        transform: scaleX(1.3) scaleY(1.3);
+    }
+}
+@keyframes nm2 {
+    to{
+        transform: scaleX(200);
+    }
+}
+.mn input:hover~.cls{
+    animation: nm2 0.5s linear forwards;
+}
+.mn .cls3:hover~.cls2{
+    animation: nm2 0.5s linear forwards;
+}
+.mn{
+    background-color: antiquewhite;
+}
+
+    input[type="text"]:focus {
+  border: none; /* blue border */
+  outline: none;             /* removes the default blue glow */
+}
+.cart{
+    width: 180px;
+}

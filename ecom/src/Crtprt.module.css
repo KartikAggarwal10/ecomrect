@@ -1,0 +1,151 @@
+/* Light mode default */
+body {
+  background-color: #070e14;
+  color: #111827;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.cartcontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  gap: 1.5rem;
+  background-color: #f1f5f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: background 0.3s, color 0.3s;
+}
+
+.cartitem {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  gap: 1rem;
+  transition: transform 0.2s;
+}
+
+.cartitem:hover {
+  transform: scale(1.01);
+}
+
+.productimg {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.productdetails {
+  flex: 1;
+}
+
+.productdetails h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.productdetails p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+.cartactions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qtyinput {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100px;
+  background-color: #fff;
+  color: #000;
+}
+
+.updatebtn,
+.removebtn,
+.showbtn {
+  padding: 0.4rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.updatebtn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.updatebtn:hover {
+  background-color: #2563eb;
+}
+
+.removebtn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.removebtn:hover {
+  background-color: #dc2626;
+}
+
+.showbtn {
+  background-color: #10b981;
+  color: white;
+}
+
+.showbtn:hover {
+  background-color: #059669;
+}
+
+.totalsection {
+  text-align: right;
+  padding: 1rem;
+  background: #e2e8f0;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* 🌙 DARK THEME SUPPORT */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111827;
+    color: #f3f4f6;
+  }
+
+  .cartcontainer {
+    background-color: #1f2937;
+    box-shadow: none;
+  }
+
+  .cartitem {
+    background-color: #273449;
+    color: #f9fafb;
+  }
+
+  .productdetails h3,
+  .productdetails p {
+    color: #f3f4f6;
+  }
+
+  .qtyinput {
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #e5e7eb;
+  }
+
+  .totalsection {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+}

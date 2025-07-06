@@ -1,0 +1,42 @@
+.updateContainer {
+  max-width: 480px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.updateInput {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background-color: #2b2b2b;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+}
+
+.updateInput::placeholder {
+  color: #bbb;
+}
+
+.updateButton {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #0078d4;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.updateButton:hover {
+  background-color: #005fa3;
+}

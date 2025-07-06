@@ -1,0 +1,63 @@
+/* Fvr.module.css */
+.fvrcontainer {
+  padding: 2rem;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.fvrtitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #00e6ac;
+}
+
+.fvritem {
+  display: flex;
+  align-items: center;
+  background-color: #2b2b2b;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 10px rgba(0, 255, 195, 0.15);
+}
+
+.productimg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 1rem;
+  border-radius: 8px;
+}
+
+.productdetails {
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.productdetails strong {
+  color: #00ffc3;
+}
+
+.fvractions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.removebtn {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease;
+}
+
+.removebtn:hover {
+  background-color: #e03939;
+}

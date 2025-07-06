@@ -1,0 +1,37 @@
+/* Postorders.module.css */
+.container {
+  padding: 2rem;
+  background-color: #121212;
+  color: #f1f1f1;
+  min-height: 100vh;
+}
+
+.heading {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #00ffc3;
+}
+
+.orderCard {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px rgba(0, 255, 195, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.orderCard:hover {
+  transform: scale(1.02);
+}
+
+.orderItem {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.label {
+  color: #00e6ac;
+  font-weight: bold;
+}
