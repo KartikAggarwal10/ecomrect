@@ -42,7 +42,7 @@ function Proddd() {
     formData.append("discount", prc);
     formData.append("img", img);
 
-    const res = await fetch("http://localhost:5000/api/product", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/product", {
       method: "POST",
       body: formData,
     });
