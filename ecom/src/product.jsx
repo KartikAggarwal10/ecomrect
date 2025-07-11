@@ -12,7 +12,7 @@ function Products() {
     stnmeprod(e.target.value);
   }
   useEffect (()=>{
- fetch("http://localhost:5000/api/product")
+ fetch("https://ecomrectbck.onrender.com/api/product")
     .then((res) => res.json())
     .then((dt) => {
       stpro(dt);
@@ -34,7 +34,7 @@ function Products() {
     formData.append("discount", u.discount);
     formData.append("img", u.img);
 
-    const res = await fetch("http://localhost:5000/api/crt", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/crt", {
       method: "POST",
       body: formData,
     });
@@ -52,7 +52,7 @@ function Products() {
     formData.append("discount", u.discount);
     formData.append("img", u.img);
 
-    const res = await fetch("http://localhost:5000/api/fvr", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/fvr", {
       method: "POST",
       body: formData,
     });
