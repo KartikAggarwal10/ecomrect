@@ -24,7 +24,7 @@ function Updte() {
   }
 
   const sub = async () => {
-    const res = await fetch("http://localhost:5000/api/upprod", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/upprod", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
