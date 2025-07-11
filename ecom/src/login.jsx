@@ -20,7 +20,7 @@ function Login() {
   }
 
   function mtc() {
-    fetch("http://localhost:5000/api/user")
+    fetch("https://ecomrectbck.onrender.com/api/user")
       .then((res) => res.json())
       .then((dt) => {
         const k = dt.find((u) => u.nme === nme && u.psswrd === psw);
