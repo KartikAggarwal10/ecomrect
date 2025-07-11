@@ -35,7 +35,7 @@ function Crtprt() {
   formData.append("itemId", u._id); // ✅ pass item's _id
   formData.append("newCount", ctxd);
 
-  const res = await fetch("http://localhost:5000/api/crtupd", {
+  const res = await fetch("https://ecomrectbck.onrender.com/api/crtupd", {
     method: "POST",
     body: formData,
   });
@@ -58,7 +58,7 @@ function Crtprt() {
    formData.append("user", v.user)
   formData.append("itemId", u._id);
 
-  const res = await fetch("http://localhost:5000/api/crtrem", {
+  const res = await fetch("https://ecomrectbck.onrender.com/api/crtrem", {
     method: "POST",
     body: formData,
    } );
