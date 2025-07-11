@@ -11,10 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 import multer from "multer";
-mongoose.connect("mongodb+srv://aggarwalkartik956:<db_password>@cluster0.kfy8e8p.mongodb.net/ecommerce?retryWrites=true&w=majority")
+mongoose.connect("mongodb://localhost:27017/ecommerce")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log("DB Connection Error:", err));
-
 app.use('/uploads', express.static('uploads'));
 
 // store files in 'uploads/' folder with original file names
