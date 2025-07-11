@@ -7,7 +7,7 @@ function Postorders() {
   const user = useSelector((st) => st.user.nme);
 
   useEffect(() => {
-    fetch("http://localhost:5000/orders")
+    fetch("https://ecomrectbck.onrender.com/orders")
       .then((res) => res.json())
       .then((dt) => stitemsof(dt));
   }, []);
