@@ -7,7 +7,7 @@ function Fvr() {
   const who = useSelector((st) => st.user.nme);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/fvr")
+    fetch("https://ecomrectbck.onrender.com/api/fvr")
       .then((res) => res.json())
       .then((dt) => setprc(dt));
   }, []);
@@ -19,7 +19,7 @@ function Fvr() {
     formdt.append("user", x.user);
     formdt.append("id", u._id);
 
-    const res = await fetch("http://localhost:5000/api/fvrrem", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/fvrrem", {
       method: "POST",
       body: formdt,
     });
