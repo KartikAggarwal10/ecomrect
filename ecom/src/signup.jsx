@@ -19,7 +19,7 @@ function handleChange(e){
     stdm(e.target.value==="dmin");  
 }
         const sub = async () => {
-    const res = await fetch("http://localhost:5000/api/user", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({  nme:nm,
