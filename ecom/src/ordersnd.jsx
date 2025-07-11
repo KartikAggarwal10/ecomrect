@@ -29,7 +29,7 @@ function Ordsd(props) {
     formdt.append("itemid", props.dt._id);
     formdt.append("ddrss", drs);
 
-    const res = await fetch("http://localhost:5000/api/rdr", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/rdr", {
       method: "POST",
       body: formdt,
     });
