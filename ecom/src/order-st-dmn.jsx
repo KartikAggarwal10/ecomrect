@@ -5,7 +5,7 @@ function OdrSt() {
   const [oders, storders] = useState([]);
 
   function xc() {
-    fetch("http://localhost:5000/orders")
+    fetch("https://ecomrectbck.onrender.com/orders")
       .then((res) => res.json())
       .then((dt) => storders(dt));
   }
@@ -20,7 +20,7 @@ function OdrSt() {
     fd.append("itemid", g._id);
     fd.append("sttus", (!g.sttus).toString());
 
-    const res = await fetch("http://localhost:5000/api/ordersdmin", {
+    const res = await fetch("https://ecomrectbck.onrender.com/api/ordersdmin", {
       method: "POST",
       body: fd,
     });
