@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setuser } from './userdt';
 import styles from "./login.module.css";
-
+import { Link } from 'react-router-dom';
 function Login() {
   const [x, setx] = useState(0);
   const [nme, stnme] = useState("");
@@ -14,36 +14,40 @@ function Login() {
   function nm(e) {
     stnme(e.target.value);
   }
-
   function ps(e) {
     stpsw(e.target.value);
   }
-
   function mtc() {
-    fetch("https://ecomrectbck.onrender.com/api/user")
+    console.log("nme : " + nme + " password : " + psw)
+    fetch(`http://localhost:5000/user/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        emil: nme,
+        psswrd: psw,
+      }),
+    })
       .then((res) => res.json())
       .then((dt) => {
-        const k = dt.find((u) => u.nme === nme && u.psswrd === psw);
-        if (k) {
-          const r = k.emil;
-          const dm = k.isdm;
-          dispatch(setuser({ nme, psw, r ,dm}));
+        if (dt.success && dt.user) {
+          const r = dt.user.email;
+          const dm = dt.user.isAdmin;
+          const user_name = dt.user.name;
+          dispatch(setuser({ nme, psw, r, dm, user_name }));
 
-          if (k.isdm) {
+          if (dm) {
             setx(2);
-             navigate("/uptpro");
+            navigate("/uptpro");
           } else {
             setx(1);
             navigate("/pro");
           }
-
-          // ✅ Navigate after successful login
-         
         } else {
-          alert("Invalid credentials");
+          alert(dt.error || "Invalid credentials");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Login error:", err);
         alert("Server error");
       });
@@ -54,12 +58,13 @@ function Login() {
       <div>
         <div className={styles.lp}>LOGIN</div>
         <div className={styles.mn}>
-          <input type="text" placeholder='User name' onChange={nm} />
+          <input type="email" placeholder='User email' onChange={nm} />
           <div className={styles.cls}></div>
           <input type="password" placeholder='Password' onChange={ps} className={styles.cls3} />
           <div className={styles.cls2}></div>
           <button onClick={mtc}>Submit</button>
           <div className={styles.tt}>{x > 0 ? `Welcome!` : null}</div>
+          <Link to="/signup" >signup</Link>
         </div>
       </div>
     </div>

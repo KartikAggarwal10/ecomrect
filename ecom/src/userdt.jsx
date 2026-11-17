@@ -5,7 +5,8 @@ const initialState = {
   nme: "",
   psswrd: "",
   emil: "",
-  dm:false
+  dm:false,
+  user_name : ""
 };
 
 export const counterSlice = createSlice({
@@ -18,12 +19,14 @@ export const counterSlice = createSlice({
       state.psswrd = action.payload.psswrd;
       state.emil = action.payload.emil;
       state.dm = action.payload.dm;
+      state.user_name = action.payload.user_name;
     },
     logout: (state) => {
       state.isLoggedin = false;
       state.nme = "";
       state.psswrd = "";
       state.emil = "";
+      state.user_name = "";
     }
   },
 });

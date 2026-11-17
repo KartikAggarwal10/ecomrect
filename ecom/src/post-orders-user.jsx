@@ -4,20 +4,25 @@ import styles from './Postorders.module.css';
 
 function Postorders() {
   const [itemsof, stitemsof] = useState([]);
-  const user = useSelector((st) => st.user.nme);
 
   useEffect(() => {
-    fetch("https://ecomrectbck.onrender.com/orders")
-      .then((res) => res.json())
-      .then((dt) => stitemsof(dt));
-  }, []);
+    const getOrders = async()=> {
 
-  const x = itemsof.find((m) => m.user === user);
+   
+    await fetch("http://localhost:5000/order",{
+      method:"GET",
+      credentials: "include"
+    })
+      .then((res) => res.json())
+      .then((dt) => { console.log("data is : " + dt + " " + typeof dt); stitemsof(dt.items)});
+     }
+     getOrders()
+  }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.heading}>Your Placed Orders</div>
-      {x && x.items.map((t, i) => (
+      <div className={styles.heading}>Your Placed Orders {itemsof.length}  </div>
+      {itemsof && itemsof.map((t, i) => (
         <div key={i} className={styles.orderCard}>
           <div className={styles.orderItem}><span className={styles.label}>Item:</span> {t.item}</div>
           <div className={styles.orderItem}><span className={styles.label}>Quantity:</span> {t.unt}</div>

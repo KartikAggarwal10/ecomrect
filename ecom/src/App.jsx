@@ -3,17 +3,15 @@ import { useSelector } from "react-redux";
 import Login from './login';
 import Signup from './signup';
 import Nvbr from "./Nvbr";
-import Nvbrfordm from "./fordmin";
+import Nvbrfordm from "./navbar_for_admin";
 import Proddd from "./productdd";
 import Products from "./product";
-import Updte from "./updteprod";
-import Crtprt from "./crt";
+import Crtprt from "./cart";
 import Fvr from "./fvr";
 import Ordsd from "./ordersnd";
 import Postorders from "./post-orders-user";
 import OdrSt from "./order-st-dmn";
-import { useEffect } from "react";
-
+import DisplayAdmin_Products from "./admin_see_the_products_they_made";
 function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedin);
   const dm = useSelector((st)=>st.user.dm);
@@ -45,7 +43,7 @@ function App() {
             <Route path="/ordersmdebyusers" element={<Postorders />} />
             <Route path="/pro" element={<Products />} />
             <Route path="/productdd" element={<Proddd />} />
-            <Route path="/uptpro" element={<Updte />} />
+            <Route path="/uptpro" element={<DisplayAdmin_Products />} />
           </>
         ) : (
           // Redirect any other route to login if not logged in

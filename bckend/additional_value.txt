@@ -1,0 +1,67 @@
+1. Regex Denial of Service (ReDoS)
+2. Cross-Site Scripting (XSS)
+3. Mass Assignment (Over-posting)
+4. Data Type Manipulation
+5. express-mongo-sanitize = protects against one very specific threat: NoSQL Operator Injection
+
+6. persistReducer -> help to get user info in frontend after refresh
+
+ 7. token => const token = jwt.sign(
+            {
+                userId: existingUser._id.toString(),
+                email: existingUser.emil,
+                isAdmin: existingUser.isdm
+            },
+            JWT_SECRET,
+            {
+                expiresIn: "1h"
+            }
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production"
+                ? "none"
+                : "lax",
+            maxAge: 60 * 60 * 1000
+        });
+
+        res.json({
+            success: true,
+            user: {
+                id: existingUser._id,
+                name: existingUser.nme,
+                email: existingUser.emil,
+                isAdmin: existingUser.isdm
+            }
+        });
+
+
+8. middleware/auth.js  =>  to authenticate
+
+
+
+
+
+
+task for later :- add all validators in respective area e.g. sring validator
+make something for review commnet also
+make something where user can send complaint
+make something to send complaint to admin
+
+
+wrap, cleanText, str,num, oid, email, bool, escapeRegex, safeUrl, cleanAddress
+make admin functionality
+for images add it to cloudinary
+make inputs as per schema
+Pagination on Product Listing
+File: 
+bckend/tempCodeRunnerFile.js — IDE artifact committed to the repo
+add proper algo to suggest order to user
+
+
+
+
+
+if we return through keyword default we can import it as the name we want + no need of curly brackets

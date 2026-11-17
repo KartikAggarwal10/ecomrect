@@ -1,12 +1,11 @@
-/* Ordsd.module.css */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(17, 24, 39, 0.5); /* semi-transparent dark */
-  backdrop-filter: blur(6px); /* 🌀 Blur the background */
+  background: rgba(15, 31, 35, 0.74);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,60 +13,71 @@
 }
 
 .orderContainer {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 400px;
+  --ink: #173c3b;
+  --muted: #6c8580;
+  background: #f8faf5;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(5, 25, 27, .35);
+  width: min(92%, 620px);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
+  color: var(--ink);
+  animation: riseIn .35s ease-out both;
 }
 
-.inputBox {
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
+.header { display: flex; justify-content: space-between; gap: 20px; }
+.eyebrow, .locationLabel {
+  margin: 0 0 7px;
+  color: #da6849;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
 }
-
-.orderButton {
-  padding: 0.75rem;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.header h2 { margin: 0; font-size: clamp(24px, 4vw, 34px); letter-spacing: -.05em; line-height: 1; }
+.helper { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+.stepBadge {
+  align-self: flex-start; background: #e4eee8; color: #2c6962; border-radius: 999px;
+  padding: 9px 12px; font-size: 11px; font-weight: 800; letter-spacing: .1em;
 }
+.stepBadge span { color: #9bb3aa; }
+.searchRow { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid #dbe7df; border-radius: 12px; padding: 5px 6px 5px 13px; }
+.searchIcon { color: #e07451; font-size: 25px; line-height: 1; transform: rotate(-20deg); }
+.inputBox { min-width: 0; flex: 1; padding: 10px 2px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; }
+.inputBox::placeholder { color: #9aaba5; }
+.searchButton { background: #173c3b; color: #fff; border: 0; border-radius: 8px; padding: 10px 15px; font-size: 12px; font-weight: 800; }
+.searchButton:disabled { opacity: .6; }
+.mapShell { position: relative; overflow: hidden; height: 270px; border-radius: 16px; background: #dce9e0; }
+.map { height: 100%; width: 100%; z-index: 0; }
+.mapPin { background: transparent; border: 0; }
+.mapPin::before { content: ""; display: block; width: 28px; height: 28px; border-radius: 50% 50% 50% 0; background: #e36f4c; border: 4px solid #fff; box-shadow: 0 5px 12px rgba(31, 58, 54, .3); transform: rotate(-45deg); }
+.mapPin .pinCore { position: absolute; top: 10px; left: 10px; width: 8px; height: 8px; border-radius: 50%; background: #fff; z-index: 1; }
+.locateButton { position: absolute; right: 12px; top: 12px; z-index: 400; border: 0; border-radius: 999px; background: rgba(255,255,255,.94); color: #173c3b; padding: 9px 12px; font-size: 11px; font-weight: 800; box-shadow: 0 3px 12px rgba(23, 60, 59, .15); }
+.locateButton span { color: #da6849; font-size: 16px; vertical-align: -1px; }
+.mapHint { position: absolute; left: 12px; bottom: 12px; z-index: 400; color: #fff; background: rgba(23, 60, 59, .82); border-radius: 6px; padding: 7px 9px; font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.selectedLocation { display: flex; gap: 11px; align-items: flex-start; padding: 12px 14px; border: 1px solid #dce9df; background: #f1f6f0; border-radius: 12px; }
+.locationMarker { color: #e36f4c; font-size: 17px; line-height: 1.2; }
+.locationLabel { color: #73918a; margin-bottom: 4px; font-size: 9px; }
+.addressText { margin: 0; color: #315a55; font-size: 12px; line-height: 1.45; }
+.notice { margin: -4px 0 0; color: #bb513a; font-size: 12px; }
+.actions { display: flex; gap: 10px; }
+.confirmButton, .orderButton { flex: 1; border: 0; border-radius: 10px; padding: 13px 15px; font-size: 12px; font-weight: 800; transition: transform .2s, background .2s, opacity .2s; }
+.confirmButton { background: #dcece2; color: #28645d; }
+.confirmButton.confirmed { background: #c7e2d2; color: #1c6a51; }
+.orderButton { background: #e36f4c; color: #fff; box-shadow: 0 8px 18px rgba(227, 111, 76, .22); }
+.orderButton:disabled { opacity: .42; box-shadow: none; cursor: not-allowed; }
+.confirmButton:not(:disabled):hover, .orderButton:not(:disabled):hover { transform: translateY(-1px); }
+.orderButton span { font-size: 17px; margin-left: 5px; vertical-align: -1px; }
+.successMessage { background: #dcefe1; color: #216148; border: 1px solid #afd4bb; padding: 11px 13px; border-radius: 10px; font-size: 12px; font-weight: 700; }
 
-.orderButton:hover {
-  background-color: #2563eb;
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
-/* Add inside Ordsd.module.css */
-
-.successMessage {
-  background-color: #d1fae5;
-  color: #065f46;
-  border: 1px solid #10b981;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  font-weight: 500;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
+@media (max-width: 520px) {
+  .orderContainer { padding: 22px 16px; border-radius: 18px; }
+  .mapShell { height: 235px; }
+  .actions { flex-direction: column; }
 }
-
-/* Optional fade-in effect */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-

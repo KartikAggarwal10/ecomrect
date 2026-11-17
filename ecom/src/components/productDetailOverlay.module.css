@@ -1,0 +1,167 @@
+.backdrop {
+  align-items: center;
+  background: rgba(11, 27, 27, 0.76);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 20px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.panel {
+  background: #fbf8f2;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  max-height: 92vh;
+  max-width: 980px;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+.close {
+  background: #fbf8f2;
+  border: 0;
+  color: #102a2a;
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 1;
+  padding: 8px 14px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 1;
+}
+
+.gallery {
+  padding: 20px;
+}
+
+.imageStage {
+  align-items: center;
+  background: #e4ded4;
+  display: flex;
+  height: min(62vh, 560px);
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.noImage {
+  color: #68716c;
+  font-size: 14px;
+}
+
+.arrow {
+  background: #fbf8f2;
+  border: 0;
+  color: #102a2a;
+  cursor: pointer;
+  font-size: 22px;
+  height: 42px;
+  position: absolute;
+  top: calc(50% - 21px);
+  width: 42px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.thumbnail {
+  background: #e4ded4;
+  border: 2px solid transparent;
+  cursor: pointer;
+  height: 58px;
+  padding: 0;
+  width: 58px;
+}
+
+.selectedThumbnail {
+  border-color: #d96c45;
+}
+
+.thumbnailImage {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.details {
+  align-self: center;
+  padding: 52px 40px 40px 10px;
+}
+
+.eyebrow {
+  color: #d96c45;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: #102a2a;
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 5vw, 58px);
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+  margin: 12px 0 8px;
+}
+
+.category {
+  color: #68716c;
+  margin: 0 0 28px;
+  text-transform: capitalize;
+}
+
+.priceRow {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.price {
+  color: #102a2a;
+  font-size: 24px;
+}
+
+.discount {
+  color: #d96c45;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.rule {
+  border-top: 1px solid #d8d1c7;
+  margin: 28px 0 14px;
+}
+
+.specifications {
+  color: #68716c;
+  font-size: 13px;
+  margin: 0;
+}
+
+.specification {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+}
+
+.description {
+  border-top: 1px solid #d8d1c7;
+  margin-top: 12px;
+  padding-top: 14px;
+}

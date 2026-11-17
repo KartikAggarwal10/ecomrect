@@ -3,31 +3,56 @@ import styles from "./OdrSt.module.css";
 
 function OdrSt() {
   const [oders, storders] = useState([]);
+  async function xc() {
+    console.log("came in order for admin");
 
-  function xc() {
-    fetch("https://ecomrectbck.onrender.com/orders")
-      .then((res) => res.json())
-      .then((dt) => storders(dt));
-  }
+    try {
+        console.log("before fetch");
+
+        const res = await fetch("http://localhost:5000/order/for_admin", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        console.log("fetch completed");
+        console.log("status:", res.status);
+
+        const dt = await res.json();
+
+        console.log("response data:",dt);
+
+        storders(dt);
+
+    } catch (err) {
+        console.error("FETCH ERROR:", err);
+    }
+}
 
   useEffect(() => {
     xc();
   }, []);
 
   const chng = async (g, h) => {
-    const fd = new FormData();
-    fd.append("user", h.user);
-    fd.append("itemid", g._id);
-    fd.append("sttus", (!g.sttus).toString());
-
-    const res = await fetch("https://ecomrectbck.onrender.com/api/ordersdmin", {
+    const res = await fetch("http://localhost:5000/order/admin_update", {
       method: "POST",
-      body: fd,
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      //body: JSON.stringify({ itemid: g._id, sttus: }),
+      body:JSON.stringify({itemid : g.product_id,sttus : (!g.sttus),user : h.user})
     });
 
     const data = await res.json();
     console.log(data);
-    xc(); // refresh after change
+    storders(prev =>
+  prev.map(user => ({
+    ...user,
+    items: user.items.map(item =>
+      item.product_id === g.product_id
+        ? { ...item, sttus: !item.sttus }
+        : item
+    )
+  }))
+);
   };
 
   return (

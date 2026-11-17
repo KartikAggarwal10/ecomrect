@@ -1,82 +1,133 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from "./product.module.css";
+import ProductDetailOverlay from './components/productDetailOverlay';
 
 function Products() {
   const [pro, stpro] = useState([]);
   const [ct, stct] = useState(0);
-  const [nmeprod, stnmeprod] = useState("");
-  const count = useSelector((state) => state.user.nme);
-
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [sortBy, setSortBy] = useState("interest");
+  const loadMoreRef = useRef(null);
+  const loadingRef = useRef(false);
+  const hasMoreRef = useRef(true);
+  const[load_product,set_load_product] = useState(false);
+  const[product_to_load,set_product_to_load] = useState({})
   function chn(e) {
-    stnmeprod(e.target.value);
+    setSearchInput(e.target.value);
   }
-  useEffect (()=>{
- fetch("https://ecomrectbck.onrender.com/api/product")
-    .then((res) => res.json())
-    .then((dt) => {
-      stpro(dt);
+  const loadProducts = useCallback(async (nextPage, replace = false) => {
+    if (loadingRef.current || (!replace && !hasMoreRef.current)) return;
+
+    loadingRef.current = true;
+    setLoading(true);
+    const params = new URLSearchParams({
+      page: String(nextPage),
+      limit: "10",
+      sort: sortBy,
     });
-  },[])
-  
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
+    if (category) params.set("category", category);
+
+    try {
+      const res = await fetch(`http://localhost:5000/product/?${params}`, {
+        method:"GET",
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error("Unable to load products");
+      const data = await res.json();
+      stpro((current) => replace ? data.products : [...current, ...data.products]);
+      setPage(nextPage);
+      hasMoreRef.current = data.hasMore;
+      setHasMore(data.hasMore);
+    } catch (error) {
+      console.error("Product fetch error:", error);
+    } finally {
+      loadingRef.current = false;
+      setLoading(false);
+    }
+  }, [category, searchQuery, sortBy]);
+
+  useEffect(() => {
+    stpro([]);
+    setPage(1);
+    hasMoreRef.current = true;
+    setHasMore(true);
+    loadProducts(1, true);
+  }, [category, searchQuery, sortBy, loadProducts]);
+
+  useEffect(() => {
+    const element = loadMoreRef.current;
+    if (!element) return undefined;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) loadProducts(page + 1);
+    }, { rootMargin: "240px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [loadProducts, page]);
 
   function chng(e) {
     stct(e.target.value);
   }
 
-  const tocrt = async (u) => {
-    const formData = new FormData();
-    formData.append("user", count);
-    formData.append("nme", u.nme);
-    formData.append("ctgry", u.ctgry);
-    formData.append("count", ct);
-    formData.append("price", u.price);
-    formData.append("discount", u.discount);
-    formData.append("img", u.img);
+  function changeCategory(e) {
+    setCategory(e.target.value);
+  }
 
-    const res = await fetch("https://ecomrectbck.onrender.com/api/crt", {
+  const tocrt = async (u) => {
+    const res = await fetch("http://localhost:5000/cart/", {
       method: "POST",
-      body: formData,
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product_id: u._id, quantity: Number(ct) || 1 }),
     });
 
-    const data = await res.json();
-    console.log(data);
+    if (!res.ok) console.error("Unable to add product to cart");
   };
 
   const ddfv = async (u) => {
-    const formData = new FormData();
-    formData.append("user", count);
-    formData.append("nme", u.nme);
-    formData.append("ctgry", u.ctgry);
-    formData.append("price", u.price);
-    formData.append("discount", u.discount);
-    formData.append("img", u.img);
-
-    const res = await fetch("https://ecomrectbck.onrender.com/api/fvr", {
+    const res = await fetch("http://localhost:5000/favorite/", {
       method: "POST",
-      body: formData,
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product_id: u._id }),
     });
 
-    const data = await res.json();
-    console.log(data);
+    if (!res.ok) {
+      console.error("Unable to add favorite");
+    }
   };
 
   function settofind() {
-    const fg = pro.filter((u) => u.nme.includes(nmeprod));
-    stpro(fg);
+    setSearchQuery(searchInput);
   }
 
   function sort() {
-    const bh = [...pro].sort((u, v) => u.price - v.price);
-    stpro(bh);
+    setSortBy((current) => current === "priceAsc" ? "priceDesc" : "priceAsc");
   }
+
+  const productImage = (item) =>
+    Array.isArray(item.img) ? item.img[0] : item.img;
+
+  const productCategory = (item) =>
+    Array.isArray(item.ctgry) ? item.ctgry.join(", ") : item.ctgry;
   return (
     <>
+    {
+      load_product && <ProductDetailOverlay product={product_to_load} isOpen = {load_product}
+  onClose = {set_load_product} />
+    }
       <div className={styles.pageHeader}>Products</div>
 
       <div className={styles.controls}>
         <input type="text" placeholder="Enter name" onChange={chn} />
-        <select id="fruit" name="fruit" onChange={chn}>
+        <select id="fruit" name="fruit" onChange={changeCategory}>
+          <option value="">All categories</option>
           <option value="electronic">Electronic</option>
           <option value="digi">Digital</option>
         </select>
@@ -85,12 +136,13 @@ function Products() {
       </div>
 
       <div className={styles.lldx}>
-        {pro.map((u, i) => (
-          <div key={i} className={styles.prt}>
+        {pro.map((u) => (
+          <div key={u._id} className={styles.prt}>
             <img
-              src={"http://localhost:5000/" + u.img.replace("\\", "/")}
+              src={productImage(u)}
               alt=""
               width="140"
+              onClick={() => {set_load_product(true) , set_product_to_load(u)}}
             />
             <div className={styles.trt}>
               <button onClick={() => ddfv(u)}>Add to Favorites</button>
@@ -98,7 +150,7 @@ function Products() {
             <div className={styles.up}>
               Name: {u.nme}
               <br />
-              Category: {u.ctgry}
+              Category: {productCategory(u)}
             </div>
             <div className={styles.hd}>Discount: {u.discount}%</div>
 
@@ -118,6 +170,10 @@ function Products() {
             </div>
           </div>
         ))}
+      </div>
+      <div ref={loadMoreRef} className={styles.paginationStatus}>
+        {loading && "Loading more products…"}
+        {!loading && !hasMore && pro.length > 0 && "You have reached the end."}
       </div>
     </>
   );
