@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import styles from "./ProductDetailOverlay.module.css";
+import styles from "./productDetailOverlay.module.css";
 const defaultImageBaseUrl = "/api";
 
 function imageUrl(image, imageBaseUrl) {
