@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './upd.module.css';
+import { apiFetch } from './api';
 
 function Updte({props,onClose}) {
   const [prec, setprc] = useState(props.price ?? 0);
@@ -26,7 +27,7 @@ function Updte({props,onClose}) {
   }
 
   const sub = async () => {
-    const res = await fetch(`/api/product/update`, {
+    const res = await apiFetch(`/api/product/update`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:"include",

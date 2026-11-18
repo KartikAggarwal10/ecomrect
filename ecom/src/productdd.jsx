@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from "./Prodd.module.css";
+import { apiFetch } from './api';
 
 function Proddd() {
   const [form, setForm] = useState({
@@ -67,7 +68,7 @@ function Proddd() {
     setSubmitting(true);
     setStatus("");
     try {
-      const res = await fetch(`/api/product/upload`, {
+      const res = await apiFetch(`/api/product/upload`, {
         method: "POST",
         credentials: "include",
         body: formData,

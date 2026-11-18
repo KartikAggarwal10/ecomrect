@@ -1,54 +1,39 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+// Read the secret when verifying, not at import time. Pinning the algorithm
+// stops tokens signed with a different algorithm from being accepted.
+const verifyAccess = (token) =>
+  jwt.verify(token, process.env.JWT_SECRET, { algorithms: ["HS256"] });
 
-export const optionalAuthenticate = (req, res, next) => {
-    const token = req.cookies?.token;
-
-    if (!token) return next();
-
+// Never rejects: sets req.user if the access cookie is valid, else stays anonymous
+export const optionalAuthenticate = (req, _res, next) => {
+  const token = req.cookies?.access_token;
+  if (token) {
     try {
-        req.user = jwt.verify(token, JWT_SECRET);
+      req.user = verifyAccess(token);
     } catch {
-        // Product browsing remains available when an expired cookie is present.
+      // Expired or invalid: browsing stays available, just not personalised
     }
-
-    next();
+  }
+  next();
 };
 
 export const authenticate = (req, res, next) => {
-    try {
-        const token = req.cookies.token;
-
-        if (!token) {
-            return res.status(401).json({
-                success: false,
-                error: "Authentication required"
-            });
-        }
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-
-        req.user = decoded;
-
-        next();
-
-    } catch (error) {
-        return res.status(401).json({
-            success: false,
-            error: "Invalid or expired token"
-        });
-    }
+  const token = req.cookies?.access_token;
+  if (!token) {
+    return res.status(401).json({ success: false, error: "Authentication required" });
+  }
+  try {
+    req.user = verifyAccess(token);
+    next();
+  } catch {
+    res.status(401).json({ success: false, error: "Invalid or expired token" });
+  }
 };
 
 export const adminOnly = (req, res, next) => {
-
-    if (!req.user?.isAdmin) {
-        return res.status(403).json({
-            success: false,
-            error: "Admin access required"
-        });
-    }
-
-    next();
+  if (!req.user?.isAdmin) {
+    return res.status(403).json({ success: false, error: "Admin access required" });
+  }
+  next();
 };

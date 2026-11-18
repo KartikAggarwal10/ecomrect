@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Ordsd from './ordersnd';
 import styles from './Crtprt.module.css';
 import ProductDetailOverlay from './components/productDetailOverlay';
+import { apiFetch } from './api';
 function Crtprt() {
   const[prod,stprod] = useState([]);
   const[ctxd,sctxd] = useState(0);
@@ -20,7 +21,7 @@ function Crtprt() {
     sctxd(e.target.value)
   } 
      const upd = async (u) => {
-  const res = await fetch(`/api/cart/update`, {
+  const res = await apiFetch(`/api/cart/update`, {
     method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -51,7 +52,7 @@ const showAnswer = (success, message) => {
     }, 1000);
 };
  const fgfg = async()=>{
-  fetch(`/api/cart/id`,{
+  apiFetch(`/api/cart/id`,{
     method: "GET",
       credentials: "include"
   })
@@ -82,7 +83,7 @@ useEffect(() => {
   const formData = new FormData();
   formData.append("itemId", u._id);
   tots(deleted_sum)
-  const res = await fetch(`/api/cart/removeItem`, {
+  const res = await apiFetch(`/api/cart/removeItem`, {
     method: "POST",
     credentials: "include",
     body: formData,

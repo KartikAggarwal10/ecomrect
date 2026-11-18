@@ -33,7 +33,7 @@ function Login() {
         if (dt.success && dt.user) {
           const r = dt.user.email;
           const dm = dt.user.isAdmin;
-          const user_name = dt.user.name;
+          const user_name = dt.user.user_name;
           dispatch(setuser({ nme, psw, r, dm, user_name }));
 
           if (dm) {

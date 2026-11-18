@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from './Fvr.module.css';
-
+import { apiFetch } from './api';
 function Fvr() {
   const [favorites, setFavorites] = useState([]);
   const [preview, setPreview] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    fetch(`/api/favorite/`, {method:"GET", credentials: "include" })
+    apiFetch(`/api/favorite/`, {method:"GET", credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("Unable to load favorites");
         return res.json();
@@ -42,7 +42,7 @@ function Fvr() {
   };
 
   const fvrrem = async (product) => {
-    const res = await fetch(`/api/favorite/remove`, {
+    const res = await apiFetch(`/api/favorite/remove`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

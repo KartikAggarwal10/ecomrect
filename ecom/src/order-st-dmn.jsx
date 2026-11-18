@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from "./OdrSt.module.css";
+import { apiFetch } from './api';
 
 function OdrSt() {
   const [oders, storders] = useState([]);
@@ -8,7 +9,7 @@ function OdrSt() {
     try {
         console.log("before fetch");
 
-        const res = await fetch(`/api/order/for_admin`, {
+        const res = await apiFetch(`/api/order/for_admin`, {
             method: "GET",
             credentials: "include"
         });
@@ -29,7 +30,7 @@ function OdrSt() {
   }, []);
 
   const chng = async (g, h) => {
-    const res = await fetch(`/api/order/admin_update`, {
+    const res = await apiFetch(`/api/order/admin_update`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

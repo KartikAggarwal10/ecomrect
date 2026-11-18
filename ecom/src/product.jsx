@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from "./product.module.css";
 import ProductDetailOverlay from './components/productDetailOverlay';
+import { apiFetch } from './api';
 
 function Products() {
   const [pro, stpro] = useState([]);
@@ -34,7 +35,7 @@ function Products() {
     if (category) params.set("category", category);
 
     try {
-      const res = await fetch(`/api/product/?${params}`, {
+      const res = await apiFetch(`/api/product/?${params}`, {
         method:"GET",
         credentials: "include",
       });
@@ -80,7 +81,7 @@ function Products() {
   }
 
   const tocrt = async (u) => {
-    const res = await fetch(`/api/cart/`, {
+    const res = await apiFetch(`/api/cart/`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +92,7 @@ function Products() {
   };
 
   const ddfv = async (u) => {
-    const res = await fetch(`/api/favorite/`, {
+    const res = await apiFetch(`/api/favorite/`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

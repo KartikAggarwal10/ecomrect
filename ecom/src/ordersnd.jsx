@@ -4,6 +4,7 @@ import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from "react-lea
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./Ordsd.module.css";
+import { apiFetch } from './api';
 
 const INITIAL_LOCATION = { lat: 28.6139, lng: 77.209 };
 const markerIcon = L.divIcon({
@@ -118,26 +119,26 @@ function Ordsd(props) {
     const formdt = new FormData();
     formdt.append("user", nm);
     formdt.append("item", props.dt.nme);
-    formdt.append("unt", props.dt.count);
+    formdt.append("unt", props.dt.cartCount);
     formdt.append("sttus", false);
 
-    const qty = props.dt.count;
+    const qty = props.dt.cartCount;
     const unitPrice = props.dt.price;
     const discount = props.dt.discount;
     const finalPrice = qty * (unitPrice - (unitPrice * discount / 100));
     formdt.append("price", finalPrice.toFixed(2));
-    formdt.append("count", props.dt.count);
+    formdt.append("count", props.dt.cartCount);
     formdt.append("itemid", props.dt._id);
     formdt.append("ddrss", selectedAddress);
     formdt.append("latitude", location.lat.toString());
     formdt.append("longitude", location.lng.toString());
 
     try {
-      const res = await fetch(`/api/order/`, {
+      const res = await apiFetch(`/api/order/`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product_id: props.dt._id, quantity: props.dt.count , ddrss : selectedAddress }),
+        body: JSON.stringify({ product_id: props.dt._id, quantity: Number(props.dt.cartCount), ddrss: selectedAddress }),
       });
       if (!res.ok) throw new Error("Order request failed");
       setSuccess(true);

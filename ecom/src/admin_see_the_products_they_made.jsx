@@ -1,13 +1,14 @@
 import { useEffect,useState } from "react";
 import { Navigate } from "react-router-dom";
 import Updte from "./updteprod";
+import { apiFetch } from './api';
 
 export default function DisplayAdmin_Products() {
     const[products,set_products] = useState([])
     const[navigate,setNavigate] = useState(false)
     const[productToChange,setProductToChange] = useState({})
     const do_work = async() => {
-        const res = await fetch(`/api/product/give_products_made_by_admin`, {
+        const res = await apiFetch(`/api/product/give_products_made_by_admin`, {
       method: "GET",
       credentials:"include",
     });

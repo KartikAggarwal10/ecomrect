@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import styles from './Postorders.module.css';
+import { apiFetch } from './api';
 
 function Postorders() {
   const [itemsof, stitemsof] = useState([]);
@@ -9,7 +10,7 @@ function Postorders() {
     const getOrders = async()=> {
 
    
-    await fetch(`/api/order`,{
+    await apiFetch(`/api/order`,{
       method:"GET",
       credentials: "include"
     })
