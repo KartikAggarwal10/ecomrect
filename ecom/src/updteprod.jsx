@@ -26,7 +26,7 @@ function Updte({props,onClose}) {
   }
 
   const sub = async () => {
-    const res = await fetch(`${process.env.backend_url}product/update`, {
+    const res = await fetch(`/api/product/update`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:"include",

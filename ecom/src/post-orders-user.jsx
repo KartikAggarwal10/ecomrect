@@ -9,7 +9,7 @@ function Postorders() {
     const getOrders = async()=> {
 
    
-    await fetch(`${process.env.backend_url}order`,{
+    await fetch(`/api/order`,{
       method:"GET",
       credentials: "include"
     })

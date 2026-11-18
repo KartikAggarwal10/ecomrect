@@ -67,7 +67,7 @@ function Proddd() {
     setSubmitting(true);
     setStatus("");
     try {
-      const res = await fetch(`${process.env.backend_url}product/upload`, {
+      const res = await fetch(`/api/product/upload`, {
         method: "POST",
         credentials: "include",
         body: formData,

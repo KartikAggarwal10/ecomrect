@@ -20,7 +20,7 @@ function Crtprt() {
     sctxd(e.target.value)
   } 
      const upd = async (u) => {
-  const res = await fetch(`${process.env.backend_url}cart/update`, {
+  const res = await fetch(`/api/cart/update`, {
     method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ const showAnswer = (success, message) => {
     }, 1000);
 };
  const fgfg = async()=>{
-  fetch(`${process.env.backend_url}cart/id`,{
+  fetch(`/api/cart/id`,{
     method: "GET",
       credentials: "include"
   })
@@ -82,7 +82,7 @@ useEffect(() => {
   const formData = new FormData();
   formData.append("itemId", u._id);
   tots(deleted_sum)
-  const res = await fetch(`${process.env.backend_url}cart/removeItem`, {
+  const res = await fetch(`/api/cart/removeItem`, {
     method: "POST",
     credentials: "include",
     body: formData,

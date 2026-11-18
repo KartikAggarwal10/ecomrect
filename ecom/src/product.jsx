@@ -34,7 +34,7 @@ function Products() {
     if (category) params.set("category", category);
 
     try {
-      const res = await fetch(`${process.env.backend_url}product/?${params}`, {
+      const res = await fetch(`/api/product/?${params}`, {
         method:"GET",
         credentials: "include",
       });
@@ -80,7 +80,7 @@ function Products() {
   }
 
   const tocrt = async (u) => {
-    const res = await fetch(`${process.env.backend_url}cart/`, {
+    const res = await fetch(`/api/cart/`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +91,7 @@ function Products() {
   };
 
   const ddfv = async (u) => {
-    const res = await fetch(`${process.env.backend_url}favorite/`, {
+    const res = await fetch(`/api/favorite/`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

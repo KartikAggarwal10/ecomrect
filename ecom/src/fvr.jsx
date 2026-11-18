@@ -7,7 +7,7 @@ function Fvr() {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    fetch(`${process.env.backend_url}favorite/`, {method:"GET", credentials: "include" })
+    fetch(`/api/favorite/`, {method:"GET", credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("Unable to load favorites");
         return res.json();
@@ -42,7 +42,7 @@ function Fvr() {
   };
 
   const fvrrem = async (product) => {
-    const res = await fetch(`${process.env.backend_url}favorite/remove`, {
+    const res = await fetch(`/api/favorite/remove`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

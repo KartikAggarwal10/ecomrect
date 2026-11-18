@@ -19,7 +19,7 @@ function Login() {
   }
   function mtc() {
     console.log("nme : " + nme + " password : " + psw)
-    fetch(`${process.env.backend_url}user/login`, {
+    fetch(`/api/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

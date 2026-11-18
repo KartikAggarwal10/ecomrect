@@ -8,7 +8,7 @@ function OdrSt() {
     try {
         console.log("before fetch");
 
-        const res = await fetch(`${process.env.backend_url}order/for_admin`, {
+        const res = await fetch(`/api/order/for_admin`, {
             method: "GET",
             credentials: "include"
         });
@@ -29,7 +29,7 @@ function OdrSt() {
   }, []);
 
   const chng = async (g, h) => {
-    const res = await fetch(`${process.env.backend_url}order/admin_update`, {
+    const res = await fetch(`/api/order/admin_update`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
