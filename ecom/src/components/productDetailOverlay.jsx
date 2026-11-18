@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./ProductDetailOverlay.module.css";
-const defaultImageBaseUrl = "http://localhost:5000/";
+const defaultImageBaseUrl = process.env.backend_url;
 
 function imageUrl(image, imageBaseUrl) {
   const path = typeof image === "string" ? image : image?.url || image?.path;

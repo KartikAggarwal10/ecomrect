@@ -133,7 +133,7 @@ function Ordsd(props) {
     formdt.append("longitude", location.lng.toString());
 
     try {
-      const res = await fetch("http://localhost:5000/order/", {
+      const res = await fetch(`${process.env.backend_url}order/`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

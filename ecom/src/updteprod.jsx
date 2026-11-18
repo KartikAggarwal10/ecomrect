@@ -26,7 +26,7 @@ function Updte({props,onClose}) {
   }
 
   const sub = async () => {
-    const res = await fetch("http://localhost:5000/product/update", {
+    const res = await fetch(`${process.env.backend_url}product/update`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:"include",

@@ -15,8 +15,7 @@ dist-ssr/
 build/
 out/
 
-# Uploads & User Generated Content
-uploads/
+# Uploads & User Generated Content (stored inside bckend/)
 bckend/uploads/
 
 # Logs

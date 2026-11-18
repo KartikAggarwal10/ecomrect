@@ -4,22 +4,18 @@ import styles from "./OdrSt.module.css";
 function OdrSt() {
   const [oders, storders] = useState([]);
   async function xc() {
-    console.log("came in order for admin");
 
     try {
         console.log("before fetch");
 
-        const res = await fetch("http://localhost:5000/order/for_admin", {
+        const res = await fetch(`${process.env.backend_url}order/for_admin`, {
             method: "GET",
             credentials: "include"
         });
 
-        console.log("fetch completed");
-        console.log("status:", res.status);
 
         const dt = await res.json();
 
-        console.log("response data:",dt);
 
         storders(dt);
 
@@ -33,7 +29,7 @@ function OdrSt() {
   }, []);
 
   const chng = async (g, h) => {
-    const res = await fetch("http://localhost:5000/order/admin_update", {
+    const res = await fetch(`${process.env.backend_url}order/admin_update`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

@@ -21,7 +21,7 @@ function Signup() {
   }
 
   const sub = async () => {
-    const res = await fetch("http://localhost:5000/user/", {
+    const res = await fetch(`${process.env.backend_url}user/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -7,7 +7,7 @@ export default function DisplayAdmin_Products() {
     const[navigate,setNavigate] = useState(false)
     const[productToChange,setProductToChange] = useState({})
     const do_work = async() => {
-        const res = await fetch("http://localhost:5000/product/give_products_made_by_admin", {
+        const res = await fetch(`${process.env.backend_url}product/give_products_made_by_admin`, {
       method: "GET",
       credentials:"include",
     });

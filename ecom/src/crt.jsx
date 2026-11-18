@@ -35,7 +35,7 @@ function Crtprt() {
   formData.append("itemId", u._id); // ✅ pass item's _id
   formData.append("newCount", ctxd);
 
-  const res = await fetch("https://ecomrectbck.onrender.com/api/crtupd", {
+  const res = await fetch(`${process.env.backend_url}api/crtupd`, {
     method: "POST",
     body: formData,
   });
@@ -45,7 +45,7 @@ function Crtprt() {
   fgfg();
 };
  const fgfg = async()=>{
-  fetch("http://localhost:5000/api/crt")
+  fetch(`${process.env.backend_url}api/crt`)
     .then((res) => res.json())
     .then((dt) => stprod(dt))
     .catch((err) => console.error("Fetch error:", err));
